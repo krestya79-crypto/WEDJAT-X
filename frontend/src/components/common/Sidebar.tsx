@@ -67,6 +67,7 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Sensor Trust',
     sublabel: 'Signal Quality Score',
     icon: ShieldCheck,
+    syntheticOnly: true,
   },
   {
     id: 'trajectory',
@@ -86,12 +87,14 @@ interface SidebarProps {
   activeTab: TabId;
   onSelectTab: (tab: TabId) => void;
   activeAlertCount?: number;
+  showSyntheticFeatures?: boolean;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
   activeTab,
   onSelectTab,
   activeAlertCount = 0,
+  showSyntheticFeatures = true,
 }) => {
   return (
     <aside className="w-full lg:w-64 bg-space-950/95 lg:min-h-[calc(100vh-61px)] border-r border-cyan-500/15 p-3 flex flex-col justify-between shrink-0">
@@ -101,7 +104,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         <nav className="space-y-1">
-          {NAV_ITEMS.map((item) => {
+          {NAV_ITEMS.filter((item) => showSyntheticFeatures || !item.syntheticOnly).map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
             return (

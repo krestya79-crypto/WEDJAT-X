@@ -17,9 +17,14 @@ import { MetricCard } from '../common/MetricCard';
 interface HistoryViewProps {
   history: ProcessingResultData[];
   analysisCount: number | null;
+  showSyntheticFeatures?: boolean;
 }
 
-export const HistoryView: React.FC<HistoryViewProps> = ({ history, analysisCount }) => {
+export const HistoryView: React.FC<HistoryViewProps> = ({
+  history,
+  analysisCount,
+  showSyntheticFeatures = true,
+}) => {
   const [selectedSession, setSelectedSession] = useState<ProcessingResultData | null>(
     history[0] || null
   );
@@ -55,12 +60,12 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ history, analysisCount
           subtitle="Among loaded recent sessions"
           variant="normal"
         />
-        <MetricCard
+        {showSyntheticFeatures && <MetricCard
           label="SYNTHETIC STREAM RUNS"
           value={synthCount}
           subtitle="Among loaded recent sessions"
           variant="gold"
-        />
+        />}
         <MetricCard
           label="OFFLINE PERSISTENCE"
           value="SQLite"

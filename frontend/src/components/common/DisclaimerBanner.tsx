@@ -39,12 +39,14 @@ export const DisclaimerBanner: React.FC<DisclaimerBannerProps> = ({
             <strong className="text-cyan-200">NASA OSD-575:</strong> Discrete venipuncture lab assays (N=4 Inspiration4 crew).
           </span>
         </div>
-        <div className="flex items-center gap-2 text-amber-300/90 bg-amber-950/30 px-2.5 py-1.5 rounded border border-amber-500/20">
-          <Info className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-          <span>
-            <strong className="text-amber-200">SYNTHETIC STREAMS:</strong> Continuous physiological telemetry is simulated.
-          </span>
-        </div>
+        {source !== 'NASA_LAB' && (
+          <div className="flex items-center gap-2 text-amber-300/90 bg-amber-950/30 px-2.5 py-1.5 rounded border border-amber-500/20">
+            <Info className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <span>
+              <strong className="text-amber-200">SYNTHETIC STREAMS:</strong> Continuous physiological telemetry is simulated.
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

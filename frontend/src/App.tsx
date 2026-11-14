@@ -26,12 +26,21 @@ interface PersistedTrustData {
   sensor_trust: Record<string, unknown>;
 }
 
+const IS_GITHUB_PAGES_BUILD = import.meta.env.BASE_URL === '/WEDJAT-X/';
+
+const getReviewAlertId = () => {
+  const pathname = window.location.pathname;
+  const basePath = import.meta.env.BASE_URL;
+  const appPath = basePath !== '/' && pathname.startsWith(basePath)
+    ? `/${pathname.slice(basePath.length)}`
+    : pathname;
+  const match = appPath.match(/^\/review\/([^/]+)\/?$/);
+  return match ? decodeURIComponent(match[1]) : null;
+};
+
 export function App() {
   const [activeTab, setActiveTab] = useState<TabId>('mission');
-  const [reviewAlertId, setReviewAlertId] = useState<string | null>(() => {
-    const match = window.location.pathname.match(/^\/review\/([^/]+)\/?$/);
-    return match ? decodeURIComponent(match[1]) : null;
-  });
+  const [reviewAlertId, setReviewAlertId] = useState<string | null>(getReviewAlertId);
   const [selectedCrew, setSelectedCrew] = useState<string>('');
   const [crewList, setCrewList] = useState<CrewMember[]>([]);
   const [systemStatus, setSystemStatus] = useState<SystemStatusData | null>(null);
@@ -48,6 +57,9 @@ export function App() {
   const [activeAlertCount, setActiveAlertCount] = useState<number | null>(null);
   const [totalAlertCount, setTotalAlertCount] = useState<number | null>(null);
   const [latestSensorTrust, setLatestSensorTrust] = useState<PersistedTrustData | null>(null);
+  const [apiAvailability, setApiAvailability] = useState<'checking' | 'available' | 'unavailable'>(
+    IS_GITHUB_PAGES_BUILD ? 'checking' : 'available'
+  );
   const refreshInFlight = useRef(false);
   const refreshQueued = useRef(false);
   const mounted = useRef(true);
@@ -61,15 +73,40 @@ export function App() {
     refreshController.current = controller;
     if (mounted.current) setIsRefreshing(true);
     try {
+      if (IS_GITHUB_PAGES_BUILD) {
+        const healthRes = await Promise.allSettled([api.getHealth()]);
+        if (!mounted.current) return;
+        if (healthRes[0].status === 'rejected') {
+          const reason = healthRes[0].reason;
+          setApiAvailability('unavailable');
+          setIsConnected(false);
+          setConnectionError(reason instanceof Error ? reason.message : String(reason));
+          setLastUpdated(null);
+          setSystemStatus(null);
+          setCrewList([]);
+          setSelectedCrew('');
+          setLatestResult(null);
+          setRecentAlerts([]);
+          setScenarios([]);
+          setHistory([]);
+          setAnalysisCount(null);
+          setActiveAlertCount(null);
+          setTotalAlertCount(null);
+          setLatestSensorTrust(null);
+          return;
+        }
+        setApiAvailability('available');
+      }
+
       const [statusRes, crewRes, alertsRes, latestRes, scenariosRes, historyRes, metricsRes] =
         await Promise.allSettled([
           api.getSystemStatus(controller.signal),
           api.getCrewParticipants(controller.signal),
-          api.getRecentAlerts(50, undefined, undefined, controller.signal),
-          api.getLatestAnalysis(controller.signal),
-          api.getScenarios(controller.signal),
-          api.getHistory(50, undefined, controller.signal),
-          api.getMetrics(controller.signal),
+          api.getRecentAlerts(50, IS_GITHUB_PAGES_BUILD ? 'NASA_LAB' : undefined, undefined, controller.signal),
+          api.getLatestAnalysis(controller.signal, IS_GITHUB_PAGES_BUILD ? 'NASA_LAB' : undefined),
+          IS_GITHUB_PAGES_BUILD ? Promise.resolve([] as SyntheticScenarioSummary[]) : api.getScenarios(controller.signal),
+          api.getHistory(50, IS_GITHUB_PAGES_BUILD ? 'NASA_LAB' : undefined, controller.signal),
+          IS_GITHUB_PAGES_BUILD ? Promise.resolve(null) : api.getMetrics(controller.signal),
         ]);
 
       if (!mounted.current) return;
@@ -84,9 +121,9 @@ export function App() {
       }
 
       if (alertsRes.status === 'fulfilled') {
-        setRecentAlerts(alertsRes.value || []);
+        setRecentAlerts((alertsRes.value || []).filter((alert) => !IS_GITHUB_PAGES_BUILD || !alert.is_synthetic));
       }
-      if (latestRes.status === 'fulfilled' && latestRes.value) {
+      if (latestRes.status === 'fulfilled' && latestRes.value && (!IS_GITHUB_PAGES_BUILD || !latestRes.value.is_synthetic)) {
         setLatestResult((current) => !current || latestRes.value!.timestamp >= current.timestamp ? latestRes.value : current);
       }
 
@@ -95,14 +132,14 @@ export function App() {
       }
 
       if (historyRes.status === 'fulfilled' && historyRes.value) {
-        setHistory(historyRes.value);
+        setHistory(historyRes.value.filter((session) => !IS_GITHUB_PAGES_BUILD || !session.is_synthetic));
       }
-      if (metricsRes.status === 'fulfilled') {
+      if (metricsRes.status === 'fulfilled' && metricsRes.value) {
         setAnalysisCount(metricsRes.value.analysis_count);
         setActiveAlertCount(metricsRes.value.active_alert_count);
         setTotalAlertCount(metricsRes.value.alert_record_count);
         const trust = metricsRes.value.latest_sensor_trust as PersistedTrustData | null;
-        if (trust?.is_synthetic && trust.sensor_trust) {
+        if (!IS_GITHUB_PAGES_BUILD && trust?.is_synthetic && trust.sensor_trust) {
           setLatestSensorTrust((current) => !current || Date.parse(trust.timestamp) >= Date.parse(current.timestamp) ? trust : current);
         }
       }
@@ -137,22 +174,56 @@ export function App() {
 
   useEffect(() => {
     const onPopState = () => {
-      const match = window.location.pathname.match(/^\/review\/([^/]+)\/?$/);
-      setReviewAlertId(match ? decodeURIComponent(match[1]) : null);
+      setReviewAlertId(getReviewAlertId());
     };
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
   const openReview = (alertId: string) => {
-    window.history.pushState({}, '', `/review/${encodeURIComponent(alertId)}`);
+    window.history.pushState({}, '', `${import.meta.env.BASE_URL}review/${encodeURIComponent(alertId)}`);
     setReviewAlertId(alertId);
   };
   const closeReview = () => {
-    window.history.pushState({}, '', '/');
+    window.history.pushState({}, '', import.meta.env.BASE_URL);
     setReviewAlertId(null);
     setActiveTab('alerts');
   };
+
+  if (IS_GITHUB_PAGES_BUILD && apiAvailability !== 'available') {
+    const isChecking = apiAvailability === 'checking';
+    return (
+      <main className="min-h-screen bg-space-950 text-slate-100 flex items-center justify-center p-6">
+        <section
+          role={isChecking ? 'status' : 'alert'}
+          aria-live="polite"
+          className="w-full max-w-xl rounded-xl border border-amber-500/40 bg-space-900 p-8 text-center"
+        >
+          <p className="font-mono text-xs tracking-widest text-amber-300">
+            {isChecking ? 'CONNECTING TO WEDJAT-X API' : 'BACKEND API UNAVAILABLE'}
+          </p>
+          <h1 className="mt-3 text-2xl font-semibold text-slate-100">
+            {isChecking ? 'Checking service availability' : 'Mission data is unavailable'}
+          </h1>
+          <p className="mt-3 text-sm leading-6 text-slate-300">
+            {isChecking
+              ? 'The frontend is checking its backend connection.'
+              : 'The WEDJAT-X frontend is online, but its backend API could not be reached. No synthetic or placeholder data is being shown.'}
+          </p>
+          {!isChecking && (
+            <button
+              type="button"
+              onClick={() => void loadSystemData()}
+              disabled={isRefreshing}
+              className="mt-6 rounded border border-cyan-500/40 px-4 py-2 text-sm text-cyan-200 hover:bg-cyan-950 disabled:opacity-50"
+            >
+              {isRefreshing ? 'Retrying…' : 'Retry connection'}
+            </button>
+          )}
+        </section>
+      </main>
+    );
+  }
 
   // Action: Run NASA Analysis for specific participant
   const handleRunNasaAnalysis = async (crewId: string): Promise<ProcessingResultData | null> => {
@@ -211,8 +282,9 @@ export function App() {
         {/* Navigation Sidebar */}
         <Sidebar
           activeTab={activeTab}
-              onSelectTab={setActiveTab}
-            activeAlertCount={activeAlertCount ?? 0}
+          onSelectTab={setActiveTab}
+          activeAlertCount={activeAlertCount ?? 0}
+          showSyntheticFeatures={!IS_GITHUB_PAGES_BUILD}
         />
 
         {/* Dynamic Content Viewport */}
@@ -232,6 +304,7 @@ export function App() {
               onRunNasaAnalysis={handleRunNasaAnalysis}
               onRunWearableAnalysis={handleRunWearableAnalysis}
               isAnalyzing={isAnalyzing}
+              showSyntheticFeatures={!IS_GITHUB_PAGES_BUILD}
               onNavigateTab={setActiveTab}
               onOpenReview={openReview}
             />
@@ -257,7 +330,7 @@ export function App() {
             </div>
           )}
 
-          {activeTab === 'telemetry' && (
+          {!IS_GITHUB_PAGES_BUILD && activeTab === 'telemetry' && (
             <LiveTelemetryView
               scenarios={scenarios}
               onAnalyzeScenario={handleRunWearableAnalysis}
@@ -280,10 +353,11 @@ export function App() {
               alerts={recentAlerts}
               onRefreshAlerts={loadSystemData}
               onOpenReview={openReview}
+              showSyntheticFeatures={!IS_GITHUB_PAGES_BUILD}
             />
           )}
 
-          {activeTab === 'trust' && (
+          {!IS_GITHUB_PAGES_BUILD && activeTab === 'trust' && (
               <SensorTrustView trustData={latestSensorTrust} />
           )}
 
@@ -296,7 +370,11 @@ export function App() {
           )}
 
           {activeTab === 'history' && (
-            <HistoryView history={history} analysisCount={analysisCount} />
+            <HistoryView
+              history={history}
+              analysisCount={analysisCount}
+              showSyntheticFeatures={!IS_GITHUB_PAGES_BUILD}
+            />
           )}
           </>}
         </main>

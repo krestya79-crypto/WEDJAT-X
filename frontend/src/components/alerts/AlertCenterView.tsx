@@ -18,11 +18,13 @@ interface AlertCenterViewProps {
   alerts: AlertEvidence[];
   onRefreshAlerts?: () => void;
   onOpenReview: (alertId: string) => void;
+  showSyntheticFeatures?: boolean;
 }
 
 export const AlertCenterView: React.FC<AlertCenterViewProps> = ({
   alerts,
   onOpenReview,
+  showSyntheticFeatures = true,
 }) => {
   const [sourceFilter, setSourceFilter] = useState<string>('ALL');
   const [stateFilter, setStateFilter] = useState<string>('ALL');
@@ -89,7 +91,7 @@ export const AlertCenterView: React.FC<AlertCenterViewProps> = ({
         {/* Source Filter */}
         <div className="flex items-center gap-1.5">
           <span className="text-[10px] font-mono uppercase text-slate-400 mr-1">Source:</span>
-          {['ALL', 'NASA_LAB', 'SYNTHETIC_WEARABLE'].map((src) => (
+          {(showSyntheticFeatures ? ['ALL', 'NASA_LAB', 'SYNTHETIC_WEARABLE'] : ['ALL', 'NASA_LAB']).map((src) => (
             <button
               key={src}
               onClick={() => setSourceFilter(src)}

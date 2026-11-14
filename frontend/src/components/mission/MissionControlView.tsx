@@ -34,6 +34,7 @@ interface MissionControlViewProps {
   onRunNasaAnalysis: (crewId: string) => void;
   onRunWearableAnalysis: (scenario: string) => void;
   isAnalyzing: boolean;
+  showSyntheticFeatures?: boolean;
   onNavigateTab: (tabId: any) => void;
   onOpenReview: (alertId: string) => void;
 }
@@ -50,6 +51,7 @@ export const MissionControlView: React.FC<MissionControlViewProps> = ({
   onRunNasaAnalysis,
   onRunWearableAnalysis,
   isAnalyzing,
+  showSyntheticFeatures = true,
   onNavigateTab,
   onOpenReview,
 }) => {
@@ -63,7 +65,7 @@ export const MissionControlView: React.FC<MissionControlViewProps> = ({
   return (
     <div className="space-y-6">
       {/* Top Disclaimer & Provenance Warning */}
-      <DisclaimerBanner source="BOTH" />
+      <DisclaimerBanner source={showSyntheticFeatures ? 'BOTH' : 'NASA_LAB'} />
 
       {/* Hero Mission Control Metrics Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -196,44 +198,45 @@ export const MissionControlView: React.FC<MissionControlViewProps> = ({
             })}
           </div>
 
-          {/* Quick Synthetic Test Launcher */}
-          <div className="p-3.5 rounded-lg bg-space-900/90 border border-amber-500/30 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono uppercase text-amber-300 font-semibold flex items-center gap-1.5">
-                <Radio className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-                <span>Simulate Sensor Telemetry</span>
-              </span>
-              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-950 border border-amber-500/40 text-amber-300">
-                SYNTHETIC ONLY
-              </span>
+          {showSyntheticFeatures && (
+            <div className="p-3.5 rounded-lg bg-space-900/90 border border-amber-500/30 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono uppercase text-amber-300 font-semibold flex items-center gap-1.5">
+                  <Radio className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+                  <span>Simulate Sensor Telemetry</span>
+                </span>
+                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-950 border border-amber-500/40 text-amber-300">
+                  SYNTHETIC ONLY
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-400 font-sans">
+                Test flight surgeon alert routing and motion-artifact cancellation using realistic synthetic stress scenarios.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-1">
+                <button
+                  onClick={() => onRunWearableAnalysis('normal_scenario.csv')}
+                  disabled={isAnalyzing}
+                  className="px-2.5 py-1 text-xs font-mono rounded bg-space-800 hover:bg-space-700 border border-slate-700 text-slate-300 transition-colors"
+                >
+                  Nominal
+                </button>
+                <button
+                  onClick={() => onRunWearableAnalysis('motion_artifact_scenario.csv')}
+                  disabled={isAnalyzing}
+                  className="px-2.5 py-1 text-xs font-mono rounded bg-amber-950/60 hover:bg-amber-900 border border-amber-500/40 text-amber-300 transition-colors"
+                >
+                  Motion Artifact
+                </button>
+                <button
+                  onClick={() => onRunWearableAnalysis('sensor_disconnect_scenario.csv')}
+                  disabled={isAnalyzing}
+                  className="px-2.5 py-1 text-xs font-mono rounded bg-rose-950/60 hover:bg-rose-900 border border-rose-500/40 text-rose-300 transition-colors"
+                >
+                  Lead Disconnect
+                </button>
+              </div>
             </div>
-            <p className="text-[11px] text-slate-400 font-sans">
-              Test flight surgeon alert routing and motion-artifact cancellation using realistic synthetic stress scenarios.
-            </p>
-            <div className="flex flex-wrap gap-2 pt-1">
-              <button
-                onClick={() => onRunWearableAnalysis('normal_scenario.csv')}
-                disabled={isAnalyzing}
-                className="px-2.5 py-1 text-xs font-mono rounded bg-space-800 hover:bg-space-700 border border-slate-700 text-slate-300 transition-colors"
-              >
-                Nominal
-              </button>
-              <button
-                onClick={() => onRunWearableAnalysis('motion_artifact_scenario.csv')}
-                disabled={isAnalyzing}
-                className="px-2.5 py-1 text-xs font-mono rounded bg-amber-950/60 hover:bg-amber-900 border border-amber-500/40 text-amber-300 transition-colors"
-              >
-                Motion Artifact
-              </button>
-              <button
-                onClick={() => onRunWearableAnalysis('sensor_disconnect_scenario.csv')}
-                disabled={isAnalyzing}
-                className="px-2.5 py-1 text-xs font-mono rounded bg-rose-950/60 hover:bg-rose-900 border border-rose-500/40 text-rose-300 transition-colors"
-              >
-                Lead Disconnect
-              </button>
-            </div>
-          </div>
+          )}
         </div>
       </div>
 
