@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #030712;
+    color: #e2e8f0;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Custom high-tech scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050b14;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #112240;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00f0ff;
+  }
+}
+
+@layer components {
+  /* Aerospace Glassmorphic Panels */
+  .glass-panel {
+    background: linear-gradient(135deg, rgba(13, 27, 42, 0.75) 0%, rgba(5, 11, 20, 0.85) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 240, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+  }
+
+  .glass-panel-gold {
+    background: linear-gradient(135deg, rgba(20, 20, 10, 0.75) 0%, rgba(5, 11, 20, 0.85) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+  }
+
+  .glass-panel-alert {
+    background: linear-gradient(135deg, rgba(30, 15, 15, 0.8) 0%, rgba(10, 5, 5, 0.9) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    box-shadow: 0 0 25px -3px rgba(239, 68, 68, 0.2);
+  }
+
+  /* HUD Corner Brackets */
+  .hud-bracket {
+    position: relative;
+  }
+  .hud-bracket::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #00f0ff;
+    border-left: 2px solid #00f0ff;
+    pointer-events: none;
+  }
+  .hud-bracket::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 8px;
+    height: 8px;
+    border-bottom: 2px solid #00f0ff;
+    border-right: 2px solid #00f0ff;
+    pointer-events: none;
+  }
+
+  .hud-bracket-gold::before {
+    border-top-color: #fbbf24;
+    border-left-color: #fbbf24;
+  }
+  .hud-bracket-gold::after {
+    border-bottom-color: #fbbf24;
+    border-right-color: #fbbf24;
+  }
+
+  /* Technical Grid Background */
+  .telemetry-grid {
+    background-size: 24px 24px;
+    background-image: 
+      linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  }
+
+  .radar-sweep {
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(0, 240, 255, 0.15) 60deg, transparent 65deg);
+  }
+}

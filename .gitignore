@@ -1,0 +1,38 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+frontend/node_modules/
+frontend/dist/
+node_modules/
+build/
+dist/
+
+# Environment files: allow only the safe template files.
+.env*
+!.env.example
+!.env.*.example
+
+# Local databases and SQLite journal files.
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+
+# Local test and demo artifacts.
+.audit-demo-output.txt
+.pytest-audit-tmp/
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# OS/editor artifacts.
+Thumbs.db
+Desktop.ini
+.ipynb_checkpoints/
+.vscode/

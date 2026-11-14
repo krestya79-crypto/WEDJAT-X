@@ -1,0 +1,36 @@
+[2026-11-13 14:28:57] [INFO] [Phase1_FileInventory]: Starting Phase 1: File Inventory Audit
+[2026-11-13 14:28:57] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv (Comprehensive Metabolic Panel (CMP) - SUBMITTED)
+[2026-11-13 14:28:57] [INFO] [Phase1_FileInventory]:   -> Rows: 531, Cols: 9, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 19
+[2026-11-13 14:28:57] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Comprehensive_Metabolic_Panel_CMP_TRANSFORMED.csv (Comprehensive Metabolic Panel (CMP) - TRANSFORMED)
+[2026-11-13 14:28:57] [INFO] [Phase1_FileInventory]:   -> Rows: 28, Cols: 58, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 19
+[2026-11-13 14:28:57] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Multiplex_serum.cardiovascular.EvePanel_SUBMITTED.csv (Cardiovascular EvePanel - SUBMITTED)
+[2026-11-13 14:28:57] [INFO] [Phase1_FileInventory]:   -> Rows: 252, Cols: 8, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 9
+[2026-11-13 14:28:57] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Multiplex_serum_cardiovascular_EvePanel_TRANSFORMED.csv (Cardiovascular EvePanel - TRANSFORMED)
+[2026-11-13 14:28:57] [INFO] [Phase1_FileInventory]:   -> Rows: 28, Cols: 19, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 9
+[2026-11-13 14:28:57] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Multiplex_serum.immune.AlamarPanel_SUBMITTED.xlsx (Immune AlamarPanel - SUBMITTED)
+[2026-11-13 14:28:58] [INFO] [Phase1_FileInventory]:   -> Rows: 5481, Cols: 8, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 203
+[2026-11-13 14:28:58] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Multiplex_serum.immune.AlamarPanel_TRANSFORMED.csv (Immune AlamarPanel - TRANSFORMED)
+[2026-11-13 14:28:59] [INFO] [Phase1_FileInventory]:   -> Rows: 27, Cols: 407, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 203
+[2026-11-13 14:28:59] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Multiplex_serum.immune.EvePanel_SUBMITTED.csv (Immune EvePanel - SUBMITTED)
+[2026-11-13 14:28:59] [INFO] [Phase1_FileInventory]:   -> Rows: 1988, Cols: 8, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 71
+[2026-11-13 14:28:59] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Multiplex_serum_immune_EvePanel_TRANSFORMED.csv (Immune EvePanel - TRANSFORMED)
+[2026-11-13 14:28:59] [INFO] [Phase1_FileInventory]:   -> Rows: 28, Cols: 143, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 71
+[2026-11-13 14:28:59] [INFO] [Phase1_FileInventory]: Phase 1 inventory completed successfully. Output saved to C:\Users\Computec\OneDrive\Desktop\WEDJAT_X\reports\file_inventory.xlsx
+[2026-11-13 14:56:42] [INFO] [Phase1_FileInventory]: Starting Phase 1: File Inventory Audit
+[2026-11-13 14:56:42] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv (Comprehensive Metabolic Panel (CMP) - SUBMITTED)
+[2026-11-13 14:56:42] [INFO] [Phase1_FileInventory]:   -> Rows: 531, Cols: 9, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 19
+[2026-11-13 14:56:42] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Comprehensive_Metabolic_Panel_CMP_TRANSFORMED.csv (Comprehensive Metabolic Panel (CMP) - TRANSFORMED)
+[2026-11-13 14:56:42] [INFO] [Phase1_FileInventory]:   -> Rows: 28, Cols: 58, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 19
+[2026-11-13 14:56:42] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Multiplex_serum.cardiovascular.EvePanel_SUBMITTED.csv (Cardiovascular EvePanel - SUBMITTED)
+[2026-11-13 14:56:42] [INFO] [Phase1_FileInventory]:   -> Rows: 252, Cols: 8, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 9
+[2026-11-13 14:56:42] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Multiplex_serum_cardiovascular_EvePanel_TRANSFORMED.csv (Cardiovascular EvePanel - TRANSFORMED)
+[2026-11-13 14:56:42] [INFO] [Phase1_FileInventory]:   -> Rows: 28, Cols: 19, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 9
+[2026-11-13 14:56:42] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Multiplex_serum.immune.AlamarPanel_SUBMITTED.xlsx (Immune AlamarPanel - SUBMITTED)
+[2026-11-13 14:56:43] [INFO] [Phase1_FileInventory]:   -> Rows: 5481, Cols: 8, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 203
+[2026-11-13 14:56:43] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Multiplex_serum.immune.AlamarPanel_TRANSFORMED.csv (Immune AlamarPanel - TRANSFORMED)
+[2026-11-13 14:56:43] [INFO] [Phase1_FileInventory]:   -> Rows: 27, Cols: 407, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 203
+[2026-11-13 14:56:44] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Multiplex_serum.immune.EvePanel_SUBMITTED.csv (Immune EvePanel - SUBMITTED)
+[2026-11-13 14:56:44] [INFO] [Phase1_FileInventory]:   -> Rows: 1988, Cols: 8, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 71
+[2026-11-13 14:56:44] [INFO] [Phase1_FileInventory]: Auditing file: LSDS-8_Multiplex_serum_immune_EvePanel_TRANSFORMED.csv (Immune EvePanel - TRANSFORMED)
+[2026-11-13 14:56:44] [INFO] [Phase1_FileInventory]:   -> Rows: 28, Cols: 143, Duplicates: 0, Participants: 4, Timepoints: 7, Biomarkers: 71
+[2026-11-13 14:56:44] [INFO] [Phase1_FileInventory]: Phase 1 inventory completed successfully. Output saved to C:\Users\Computec\OneDrive\Desktop\WEDJAT_X\reports\file_inventory.xlsx

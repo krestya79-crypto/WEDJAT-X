@@ -1,0 +1,12 @@
+[2026-11-13 14:34:17] [INFO] [Phase3_SampleReconciliation]: Starting Phase 3: Participant, Timepoint, and Sample Reconciliation
+[2026-11-13 14:34:17] [INFO] [Phase3_SampleReconciliation]: Panel: Comprehensive Metabolic Panel (CMP) | Sub Samples: 28, Tr Samples: 28 | Matched: 28, Missing in Tr: 0, Missing in Sub: 0
+[2026-11-13 14:34:17] [INFO] [Phase3_SampleReconciliation]: Panel: Cardiovascular EvePanel | Sub Samples: 28, Tr Samples: 28 | Matched: 28, Missing in Tr: 0, Missing in Sub: 0
+[2026-11-13 14:34:17] [INFO] [Phase3_SampleReconciliation]: Panel: Immune EvePanel | Sub Samples: 28, Tr Samples: 28 | Matched: 28, Missing in Tr: 0, Missing in Sub: 0
+[2026-11-13 14:34:22] [INFO] [Phase3_SampleReconciliation]: Panel: Immune AlamarPanel | Sub Samples: 27, Tr Samples: 27 | Matched: 27, Missing in Tr: 0, Missing in Sub: 0
+[2026-11-13 14:34:22] [INFO] [Phase3_SampleReconciliation]: Phase 3 sample reconciliation completed successfully. Output saved to C:\Users\Computec\OneDrive\Desktop\WEDJAT_X\reports\sample_reconciliation.xlsx
+[2026-11-13 14:56:48] [INFO] [Phase3_SampleReconciliation]: Starting Phase 3: Participant, Timepoint, and Sample Reconciliation
+[2026-11-13 14:56:48] [INFO] [Phase3_SampleReconciliation]: Panel: Comprehensive Metabolic Panel (CMP) | Sub Samples: 28, Tr Samples: 28 | Matched: 28, Missing in Tr: 0, Missing in Sub: 0
+[2026-11-13 14:56:48] [INFO] [Phase3_SampleReconciliation]: Panel: Cardiovascular EvePanel | Sub Samples: 28, Tr Samples: 28 | Matched: 28, Missing in Tr: 0, Missing in Sub: 0
+[2026-11-13 14:56:48] [INFO] [Phase3_SampleReconciliation]: Panel: Immune EvePanel | Sub Samples: 28, Tr Samples: 28 | Matched: 28, Missing in Tr: 0, Missing in Sub: 0
+[2026-11-13 14:56:49] [INFO] [Phase3_SampleReconciliation]: Panel: Immune AlamarPanel | Sub Samples: 27, Tr Samples: 27 | Matched: 27, Missing in Tr: 0, Missing in Sub: 0
+[2026-11-13 14:56:49] [INFO] [Phase3_SampleReconciliation]: Phase 3 sample reconciliation completed successfully. Output saved to C:\Users\Computec\OneDrive\Desktop\WEDJAT_X\reports\sample_reconciliation.xlsx

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 600" role="img" aria-labelledby="title desc">
+  <title id="title">WEDJAT-X astronaut monitoring illustration</title>
+  <desc id="desc">A stylized astronaut in a pressure suit, framed by cyan orbital rings.</desc>
+  <defs>
+    <linearGradient id="suit" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ecf5fa"/><stop offset="1" stop-color="#91aabd"/></linearGradient>
+    <linearGradient id="visor" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#52e5f4" stop-opacity=".78"/><stop offset="1" stop-color="#153355" stop-opacity=".92"/></linearGradient>
+    <radialGradient id="halo"><stop stop-color="#1e9bb5" stop-opacity=".25"/><stop offset="1" stop-color="#07111e" stop-opacity="0"/></radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <circle cx="260" cy="292" r="248" fill="url(#halo)"/>
+  <ellipse cx="260" cy="300" rx="210" ry="250" fill="none" stroke="#2bd6e6" stroke-opacity=".42" stroke-width="1.5" stroke-dasharray="3 10" transform="rotate(-19 260 300)"/>
+  <ellipse cx="260" cy="300" rx="182" ry="232" fill="none" stroke="#4e8fc7" stroke-opacity=".35" stroke-width="1" transform="rotate(22 260 300)"/>
+  <path d="M90 468 Q153 397 222 414 L298 414 Q375 398 432 469 L475 580 H45Z" fill="url(#suit)" stroke="#d5e4ec" stroke-width="3"/>
+  <path d="M148 448 Q260 505 372 448 L405 580 H116Z" fill="#c2d3df" opacity=".7"/>
+  <path d="M187 423 L260 470 L333 423 L362 580 H158Z" fill="#12243a" stroke="#607e99" stroke-width="2"/>
+  <rect x="211" y="481" width="98" height="61" rx="10" fill="#10253b" stroke="#4de2ee" stroke-opacity=".8"/>
+  <path d="M228 523 L245 509 L260 516 L282 493" fill="none" stroke="#44e2ec" stroke-width="3" filter="url(#glow)"/>
+  <circle cx="259" cy="265" r="117" fill="url(#suit)" stroke="#e7f0f4" stroke-width="4"/>
+  <path d="M168 260 C168 203 208 161 264 161 C321 161 354 205 354 260 C354 315 317 355 260 355 C204 355 168 315 168 260Z" fill="url(#visor)" stroke="#d9e8ef" stroke-width="13"/>
+  <path d="M196 235 Q232 185 300 190" fill="none" stroke="#c7fbff" stroke-opacity=".66" stroke-width="5" stroke-linecap="round"/>
+  <path d="M185 400 Q260 440 335 400" fill="none" stroke="#6d879a" stroke-width="8"/>
+  <path d="M113 462 L69 549 M407 462 L451 549" stroke="#9db3c1" stroke-width="32" stroke-linecap="round"/>
+  <circle cx="75" cy="546" r="19" fill="#dbe7ee" stroke="#607d92" stroke-width="3"/><circle cx="445" cy="546" r="19" fill="#dbe7ee" stroke="#607d92" stroke-width="3"/>
+  <circle cx="106" cy="144" r="4" fill="#47e2ed" filter="url(#glow)"/><circle cx="412" cy="187" r="3" fill="#d8b66a"/><circle cx="394" cy="408" r="4" fill="#47e2ed" filter="url(#glow)"/>
+</svg>
